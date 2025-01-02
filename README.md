@@ -11,7 +11,8 @@
 
 ### Docker Images:
 
-- Flow: ![alt text](images/image_flow.png)
+- Flow:  
+    ![alt text](images/image_flow.png)
 - Docker images are built using the Dockerfile which consists of a set of instructions that are required to containerize an application
 - Docker image is a lightweight, standalone, and executable software package that includes everything needed to run an application.
 - This includes the application code, libraries, dependencies, tools, and a runtime
@@ -73,22 +74,32 @@
 
 
 - Starting, Stopping, Inspecting a Containers:
-    - `docker start <container_id/name>` - Start a Stopped Container.
-    - `docker stop <container-id/name>` - Stop a Running Container.
-    - `docker restart <container_id/name>` - Restart a Container.
-    - `docker exec -it <container_id> bash` - Run a container with it's ID.
-    - `docker inspect <container-id or name>` - Displays detailed information about a container.
-    - `docker stop $(docker ps -q)` - Stops all running containers.
-    - `docker attach <container-id>` -  Attaches to a running container’s terminal.
+    - `docker container start` is same as `docker start`
+    - `docker container start <container_id/name>` - Start a Stopped Container.
+    - `docker container stop <container-id/name>` - Stop a Running Container.
+    - `docker container restart <container_id/name>` - Restart a Container.
+    - `docker container exec -it <container_id> bash` - Run a container with it's ID.
+    - `docker container inspect <container-id or name>` - Displays detailed information about a container.
+    - `docker container stop $(docker ps -q)` - Stops all running containers.
+    - `docker container attach <container-id>` -  Attaches to a running container’s terminal.
+    - Legacy (without `container` keyword) vs Modern Syntax (with `container` keyword):
 
 - Removing Containers:
-    - `docker rm <container-id or name>` - Remove a Specific Container.
+    - `docker container rm <container-id or name>` - Remove a Specific Container.
     - `docker container prune` - Remove All Stopped Containers.
-    - `Stops all running containers.` - Removes all containers, including stopped ones.
+    - `docker container rm $(docker ps -aq)` - Removes all containers, including stopped ones.
+    - `docker container kill <id>` - Kills a container (forcefully stops it).
 
 - Copying Files Between Host and Container:
     - `docker cp <host-path> <container-id>:<container-path>` - Copy From Host to Container.
     - `docker cp <container-id>:<container-path> <host-path>` - Copy From Container to Host.
+
+- Create copy of a container:
+    ```docker
+    docker commit <container_id/name> <new_image_name>:<tag>    # Commit the Current State of the Container to a New Image
+    docker run -it <new_image_name> bash    # Run a New Container from the New Image
+    docker container ls -a  # Show all containers (first exit from docker container)
+    ```
 
 
 ### Docker Image vs Docker Container:
