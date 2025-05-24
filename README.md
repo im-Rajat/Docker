@@ -13,11 +13,6 @@
 Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers.
 
 ### Why Docker?
-- Docker images are built using the Dockerfile which consists of a set of instructions that are required to containerize an application
-- Docker image is a lightweight, standalone, and executable software package that includes everything needed to run an application.
-- This includes the application code, libraries, dependencies, tools, and a runtime
-- A base operating system.
-- It is a blueprint of the Container.
 - The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is. Containerization is increasingly popular because containers are:
 - Flexible: Even the most complex applications can be containerized :-
 - Lightweight: Containers leverage and share the host kernel.
@@ -27,8 +22,6 @@ Docker is a platform for developers and sysadmins to develop, deploy, and run ap
 - Stackable: You can stack services vertically and on-the-fly.
 
 The process can be summarized as follows :- 
-- Flow:  
-    <img src="images/image_flow.png" alt="flow" width="500"/>
 1. Set up your Docker environment
 2. Build an image and run it as one container
 3. Scale your app to run multiple containers
@@ -42,59 +35,72 @@ The Docker Flow:
 
 ## Images
 
-- Docker images are the blueprints for containers. They are read-only templates used to create containers.
-- Images are built from a set of instructions written in a Dockerfile.
-- Each image consists of multiple layers, which makes them lightweight and fast to download.
-- Images can be pulled from public or private registries (like Docker Hub).
+- Docker images are built using the Dockerfile which consists of a set of instructions that are required to containerize an application
+- Docker image is a lightweight, standalone, and executable software package that includes everything needed to run an application.
+- This includes the application code, libraries, dependencies, tools, and a runtime
+- A base operating system.
+- It is a blueprint of the Container.
+- Flow:  
+    <img src="images/image_flow.png" alt="flow" width="500"/>
 
-### Image Management
-- `docker image ls` or `docker images` – List all local images
-- `docker image inspect <image_id>` – Display detailed information about an image
-- `docker image history <image_id>` – Show history of how an image was built (layers)
-- `docker image prune` – Remove unused images (dangling images by default)
-- `docker image rm <image_id>` – Remove an image
-- `docker rmi <image_id>` – Alias for removing an image
+### Commands of Docker Image:
 
-### Building Images
-- `docker build -t <image_name>:<tag> <path>` - Builds a new Docker image from a Dockerfile.
-- `docker build -t rajatapp:v1 .` - Dot (.) means dockerfile is located in current directory.
+- `docker image` - help
 
-### Pulling & Pushing Images
-- `docker pull <image>:<tag>` – Download an image from a registry
-- `docker push <image>:<tag>` – Upload an image to a registry
+- Listing Images:
+    - `docker image ls` or `docker images` - Show all images
+    - `docker image ls -a` - Show all images, including intermediate images (dangling images).
+    - `docker image ls -q` - Show only the image IDs.
 
-### Tagging Images
-- `docker tag <image_id> <repository>:<tag>` – Add a new tag to an image
+- Pulling a Image:
+    - `docker pull <image_name>:<tag>`
+    - `docker pull ubuntu:latest` - Downloads an image from a Docker registry (Docker Hub).
 
-### Saving & Loading Images
-- `docker save -o <file>.tar <image>:<tag>` – Save an image to a tar archive
-- `docker load -i <file>.tar` – Load an image from a tar archive
+- Building a Image:
+    - `docker build -t <image_name>:<tag> <path>` - Builds a new Docker image from a Dockerfile.
+    - `docker build -t rajatapp:v1 .` - Dot (.) means dockerfile is located in current directory.
+    - `docker build -t image_name -f mycustom.dockerfile .` - If we want to provide different dockerfile name, use `-f`
+    - `docker run -it -v /D:/mnt/d -p 85:85 -p 82:82 image_name bash` - Using `-v` we can provide host machine volume access to containers, using `-p` we can expose ports.
 
-### Searching Images
-- `docker search <term>` – Search Docker Hub for images matching a term
+- Tagging a Image:
+    - `docker tag <image_id> <new_repo>:<new_tag>` : - Assigns a new name or tag to an image.
+    - `docker tag abc123 myrepo/myapp:v1`
 
-### Cleaning Up Images
-- `docker image prune` – Remove dangling (unused) images
-- `docker image rm <image_id>` – Remove a specific image
-- `docker image rm $(docker image ls -q)` – Remove all images (use with caution)
+- Inspecting a Image:
+    - `docker inspect <image_id>` - Displays detailed information about an image.
+    - `docker inspect ubuntu:latest`
 
-### Finding Images
+- Cleaning up Images:
+    - `docker rmi <image_id>` or `docker image rm <image_id>` - Deletes an image from the local system.
+    - `docker rmi -f abc123` - Force removal of an image using `-f`.
+    - `docker image prune` – Remove dangling (unused) images
+    - `docker image rm $(docker image ls -q)` – Remove all images (use with caution)
 
-- Use the Docker CLI to search for images:  
-  `docker search <term>`
-  - Example: `docker search ubuntu`
-- We can also search and browse images on [Docker Hub](https://hub.docker.com/).
+- Pushing a Docker Image:
+    - `docker push <repo-name>:<tag>` - Uploads an image to a Docker registry.
+    - `docker push myrepo/myapp:v1`
 
-### Name Structure of Images
+- Saving & Loading Images
+    - `docker save -o <file>.tar <image>:<tag>` – Save an image to a tar archive
+    - `docker load -i <file>.tar` – Load an image from a tar archive
 
-- Images are named using the format:  
-  `registry.example.com:port/organization/image-name:version-tag`
-- For most public images, `organization/image-name` is enough (e.g., `ubuntu`, `nginx`, `myorg/myapp:1.0`).
-- The registry and port are only needed for private or custom registries.
+- Finding Images
+    - Use the Docker CLI to search for images:  
+      `docker search <term>`
+      - Example: `docker search ubuntu`
+    - We can also search and browse images on [Docker Hub](https://hub.docker.com/).
+
+- Name Structure of Images
+    - Images are named using the format:  
+      `registry.example.com:port/organization/image-name:version-tag`
+    - For most public images, `organization/image-name` is enough (e.g., `ubuntu`, `nginx`, `myorg/myapp:1.0`).
+    - The registry and port are only needed for private or custom registries.
 
 
 ## Containers
 
+- It is an instance of the Image.
+- Containers are created from Docker images.
 - `docker run hello-world` - Run a Container
 - `docker run hello-world` - does exactly what it sounds like. It runs an image named "hello-world."
 - `docker ps -a` - lists the containers on our system
@@ -102,62 +108,58 @@ The Docker Flow:
 - Now run `docker ps -a` again - We see two stopped instances of hello-world, with two different names. Docker created an additional container. It didn’t reuse the first. When we told Docker to run an image named hello-world, it did exactly that; it ran a new instance of the image. If we want to reuse a container, we refer to it by name or id.
 - With a single Docker command, `docker run -it ubuntu bash`, we downloaded an Ubuntu Linux image and started a login shell as root inside it. The `-it` flags allow us to interact with the shell.
 
-### Container Management
-- `docker container ls` or `docker ps` – List running containers
-- `docker container ls -a` or `docker ps -a` – List all containers (including stopped ones)
-- `docker container inspect <container_id>` – Get detailed information about a container
-- `docker container prune` – Remove all stopped containers
+### Commands of Docker Containers:
 
-### Starting & Stopping Containers
-- `docker container start <container_id>` – Start a stopped container
-- `docker container stop <container_id>` – Stop a running container
-- `docker container restart <container_id>` – Restart a container
-- `docker container pause <container_id>` – Pause a running container
-- `docker container unpause <container_id>` – Unpause a paused container
-- `docker container kill <container_id>` – Forcefully stop a container
+- Listing Containers:
+    - `docker ps` or `docker container ls` - Lists all running containers.
+    - `docker ps -a` - Show all containers (both running and stopped).
+    - `docker ps -q` - Show only container IDs.
 
-### Creating & Running Containers
-- `docker container run <image_id>` – Run a container from an image
-- `docker container run -d <image_id>` – Run in detached mode (background)
-- `docker container run --rm <image_id>` – Automatically remove the container after it stops
-- `docker container run -p <host_port>:<container_port> <image_id>` – Map container ports to host machine
+- Running a New Container:
+    - `docker run <options> <image-name>` or `docker container run <image_id>` - Creates and starts a new container from an image.
+    - `docker run -it ubuntu bash` - Start an interactive session using `-it`.
+    - `docker run -d <image-name>` - Starts a container in detached mode (background) using `-d`
+    -  `docker container run -p <host_port>:<container_port> <image_id>` – Map container ports to host machine
+    - `docker run -d -p 8080:80 nginx` - Map container ports to host ports using `-d`.
+    - `docker run --name mycontainer nginx` - Assign a name to the container using `--name`
 
-### Accessing a Running Container
-- `docker container exec -it <container_id> bash` – Run a bash shell in the container
-- `docker container exec -it <container_id> <command>` – Run a command inside a container
-- `docker container attach <container_id>` – Attach to a running container's terminal. The `attach` flag tells Docker to connect to the container output so we can see the results.
 
-### Logging & Monitoring
-- `docker container logs <container_id>` – View container logs
-- `docker container top <container_id>` – Show running processes inside a container
-- `docker container stats` – Display real-time resource usage of all containers
+- Starting, Stopping, Inspecting a Containers:
+    - `docker container start` is same as `docker start`
+    - `docker container start <container_id/name>` - Start a Stopped Container.
+    - `docker container stop <container-id/name>` - Stop a Running Container.
+    - `docker container restart <container_id/name>` - Restart a Container.
+    - `docker container exec -it <container_id> bash` - Run a container with it's ID.
+    - `docker container inspect <container-id or name>` - Displays detailed information about a container.
+    - `docker container stop $(docker ps -q)` - Stops all running containers.
+    - `docker container attach <container-id>` -  Attaches to a running container’s terminal.
+    - Legacy (without `container` keyword) vs Modern Syntax (with `container` keyword):
 
-### Copying Files
-- `docker container cp <container_id>:<path_inside> <host_path>` – Copy files from container to host
-- `docker container cp <host_path> <container_id>:<path_inside>` – Copy files from host to container
+- Removing Containers:
+    - `docker container rm <container-id or name>` - Remove a Specific Container.
+    - `docker container prune` - Remove All Stopped Containers.
+    - `docker container rm $(docker ps -aq)` - Removes all containers, including stopped ones.
+    - `docker container kill <id>` - Kills a container (forcefully stops it).
 
-### Removing Containers
-- `docker container rm <container_id>` – Remove a stopped container
-- `docker container rm -f <container_id>` – Force remove a running container
+- Copying Files Between Host and Container:
+    - `docker cp <host-path> <container-id>:<container-path>` - Copy From Host to Container.
+    - `docker cp <container-id>:<container-path> <host-path>` - Copy From Container to Host.
 
-### Create Copy of a Container :-
-- We can create a copy (snapshot) of a running container by committing its current state to a new image.
-- This is useful if we have made changes inside a container and want to save those changes for future use.
-  
-  1. **Commit the Running Container to a New Image**  
-     `docker commit <container_id_or_hash> new_image`
+- Create copy of a container:
+    ```docker
+    docker commit <container_id/name> <new_image_name>:<tag>    # Commit the Current State of the Container to a New Image
+    docker run -it <new_image_name> bash    # Run a New Container from the New Image
+    docker container ls -a  # Show all containers (first exit from docker container)
+    ```
 
-  2. **Run a New Container from the Committed Image**  
-     `docker run -it new_image bash`
+- Logging & Monitoring:
+    - `docker container logs <container_id>` – View container logs
+    - `docker container top <container_id>` – Show running processes inside a container
+    - `docker container stats` – Display real-time resource usage of all containers
 
-  3. **Start a Stopped Container**  
-     `docker start <container_id_or_hash>`
-
-  4. **Access a Running Container's Shell**  
-     `docker exec -it <container_id_or_hash> bash`
-
-- Replace `<container_id_or_hash>` with the actual container ID or hash.
-- Replace `new_image` with our desired image name.
+- Create WSl distribution from docker containers:
+    - `docker export -o D:/wsl/filename.tar <container_id>` - Export the container
+    - `wsl --import <DistroName> D:/WSL/ D:/wsl/filename.tar` - Import it as a new WSL distribution
 
 ### Docker Image vs Docker Container:
 
