@@ -1,11 +1,25 @@
 # Docker
 
+- List Docker CLI commands:
+    - `docker`
+    - `docker container --help`
+
+- Display Docker version and info:
+    - `docker --version`
+    - `docker version`
+    - `docker info`
+
+
 Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers.
 
 ### Why Docker?
-The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is. Containerization is increasingly popular because containers are:
-Flexible: Even the most complex applications can be containerized :-
-
+- Docker images are built using the Dockerfile which consists of a set of instructions that are required to containerize an application
+- Docker image is a lightweight, standalone, and executable software package that includes everything needed to run an application.
+- This includes the application code, libraries, dependencies, tools, and a runtime
+- A base operating system.
+- It is a blueprint of the Container.
+- The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is. Containerization is increasingly popular because containers are:
+- Flexible: Even the most complex applications can be containerized :-
 - Lightweight: Containers leverage and share the host kernel.
 - Interchangeable: You can deploy updates and upgrades on-the-fly.
 - Portable: You can build locally, deploy to the cloud, and run anywhere.
@@ -13,6 +27,8 @@ Flexible: Even the most complex applications can be containerized :-
 - Stackable: You can stack services vertically and on-the-fly.
 
 The process can be summarized as follows :- 
+- Flow:  
+    <img src="images/image_flow.png" alt="flow" width="500"/>
 1. Set up your Docker environment
 2. Build an image and run it as one container
 3. Scale your app to run multiple containers
@@ -21,7 +37,7 @@ The process can be summarized as follows :-
 6. Deploy your app to production
 
 The Docker Flow:  
-<img src="images/dockerflow.jpg" alt="alt text" width="450"/>
+<img src="images/dockerflow.jpg" alt="dockerflow" width="450"/>
 
 
 ## Images
@@ -40,8 +56,8 @@ The Docker Flow:
 - `docker rmi <image_id>` – Alias for removing an image
 
 ### Building Images
-- `docker build -t <name>:<tag> <path>` – Build an image from a Dockerfile in the specified path
-- `docker build -f <Dockerfile> -t <name>:<tag> <path>` – Specify a Dockerfile to use for building
+- `docker build -t <image_name>:<tag> <path>` - Builds a new Docker image from a Dockerfile.
+- `docker build -t rajatapp:v1 .` - Dot (.) means dockerfile is located in current directory.
 
 ### Pulling & Pushing Images
 - `docker pull <image>:<tag>` – Download an image from a registry
@@ -142,6 +158,10 @@ The Docker Flow:
 
 - Replace `<container_id_or_hash>` with the actual container ID or hash.
 - Replace `new_image` with our desired image name.
+
+### Docker Image vs Docker Container:
+
+<img src="images/image_vs_container.png" alt="Image vs Container" width="600"/>
 
 
 ## Building and Running a Dockerfile :-
