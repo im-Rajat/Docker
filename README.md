@@ -30,7 +30,7 @@ The process can be summarized as follows :-
 6. Deploy your app to production
 
 The Docker Flow:  
-<img src="images/dockerflow.jpg" alt="dockerflow" width="450"/>
+<img src="images/docker_flow.jpg" alt="Docker flow" width="450"/>
 
 
 ## Images
@@ -41,7 +41,7 @@ The Docker Flow:
 - A base operating system.
 - It is a blueprint of the Container.
 - Flow:  
-    <img src="images/image_flow.png" alt="flow" width="500"/>
+    <img src="images/image_flow.jpg" alt="Image to Containger flow" width="500"/>
 
 ### Commands of Docker Image:
 
@@ -163,7 +163,7 @@ The Docker Flow:
 
 ### Docker Image vs Docker Container:
 
-<img src="images/image_vs_container.png" alt="Image vs Container" width="600"/>
+<img src="images/image_vs_container.jpg" alt="Image vs Container" width="600"/>
 
 
 ## Building and Running a Dockerfile :-
