@@ -476,3 +476,4 @@ ENTRYPOINT echo google is this big; cat google-size
 
 - https://docs.docker.com/get-started/
 - https://www.linkedin.com/learning/learning-docker-2018
+- https://www.tutorialspoint.com/docker/index.htm
