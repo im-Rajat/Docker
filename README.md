@@ -12,6 +12,28 @@
 
 Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers.
 
+
+## Table of Contents
+
+- [Why Docker?](#why-docker)
+- [Images](#images)
+    - [Commands of Docker Image](#commands-of-docker-image)
+- [Containers](#containers)
+    - [Commands of Docker Containers](#commands-of-docker-containers)
+    - [Docker Image vs Docker Container](#docker-image-vs-docker-container)
+- [Building and Running a Dockerfile](#building-and-running-a-dockerfile)
+- [Docker Compose](#docker-compose)
+- [Linux Container vs Windows Container](#linux-container-vs-windows-container)
+- [Exposing Ports](#exposing-ports)
+- [Docker Networks](#docker-networks)
+- [Volumes](#volumes)
+- [Sharing Data with the Host](#sharing-data-with-the-host)
+- [Sharing Data Between Containers](#sharing-data-between-containers)
+- [Miscellaneous](#miscellaneous)
+    - [Docker Registries](#docker-registries)
+- [References](#references)
+
+
 ### Why Docker?
 - The use of Linux containers to deploy applications is called containerization. Containers are not new, but their use for easily deploying applications is. Containerization is increasingly popular because containers are:
 - Flexible: Even the most complex applications can be containerized :-
