@@ -1,13 +1,12 @@
-<!-- Add this at the top of index.md -->
-<style>
-.wrapper {
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-}
-</style>
-
 ---
 layout: default
 ---
+
+<style>
+.wrapper {
+    max-width: 1500px !important;
+    margin: 0 auto !important;
+}
+</style>
 
 {% include_relative README.md %}
