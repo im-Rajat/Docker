@@ -1,12 +1,1 @@
 theme: jekyll-theme-dinky
-# Add this line:
-include:
-  - assets/css/style.css
-
-# Add this to enable custom CSS:
-defaults:
-  - scope:
-      path: ""
-    values:
-      stylesheets:
-        - /assets/css/style.css
